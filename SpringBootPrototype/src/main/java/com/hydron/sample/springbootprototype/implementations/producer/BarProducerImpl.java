@@ -1,9 +1,9 @@
-package com.hydron.sample.implementations.producer;
+package com.hydron.sample.springbootprototype.implementations.producer;
 
-import com.hydron.sample.pojo.Bar;
-import com.hydron.sample.pojo.ExampleData;
-import com.hydron.sample.services.producer.ProducerInterface;
-import com.hydron.sample.utils.WordList;
+import com.hydron.sample.springbootprototype.pojo.Bar;
+import com.hydron.sample.springbootprototype.pojo.ExampleData;
+import com.hydron.sample.springbootprototype.services.producer.ProducerInterface;
+import com.hydron.sample.springbootprototype.utils.WordList;
 
 import java.time.Instant;
 
