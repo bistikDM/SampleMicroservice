@@ -17,15 +17,14 @@ import java.util.Random;
  * Hello world!
  */
 public class App {
-    private static final String SERVICE_NAME = "Demo App";
 
     public static void main(String[] args) throws IOException {
         // Instantiate producers and consumers.
-        WordList wordList = new WordList(SERVICE_NAME);
-        ProducerInterface fooProducer = new FooProducerImpl(wordList);
-        ProducerInterface barProducer = new BarProducerImpl(wordList);
-        ConsumerInterface fooConsumer = new FooConsumerImpl(SERVICE_NAME);
-        ConsumerInterface barConsumer = new BarConsumerImpl(SERVICE_NAME);
+        WordList wordList = new WordList(args[0]);
+        ProducerInterface fooProducer = new FooProducerImpl(wordList, args[0]);
+        ProducerInterface barProducer = new BarProducerImpl(wordList, args[0]);
+        ConsumerInterface fooConsumer = new FooConsumerImpl(args[0]);
+        ConsumerInterface barConsumer = new BarConsumerImpl(args[0]);
 
         Random random = new Random();
 
@@ -35,7 +34,7 @@ public class App {
                 Thread.sleep(random.nextLong(500L, 3000L));
                 ExampleData foo = fooProducer.produceData();
                 ExampleData bar = barProducer.produceData();
-                System.out.printf("[%s] [%s] -- Data produced!%n", SERVICE_NAME, Instant.now());
+                System.out.printf("[%s] [%s] -- Data produced!%n", args[0], Instant.now());
 
                 // We're "consuming" data.
                 Thread.sleep(random.nextLong(500L, 3000L));
