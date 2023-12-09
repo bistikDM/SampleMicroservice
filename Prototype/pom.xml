@@ -37,6 +37,7 @@
         <version>3.1.0</version>
         <configuration>
           <mainClass>com.hydron.sample.App</mainClass>
+          <commandlineArgs>Prototype</commandlineArgs>
         </configuration>
       </plugin>
     </plugins>
