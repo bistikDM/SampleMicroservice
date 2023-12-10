@@ -1,7 +1,6 @@
 package com.hydron.sample.springbootprototype;
 
 import com.hydron.sample.springbootprototype.pojo.ExampleData;
-import com.hydron.sample.springbootprototype.services.consumer.ConsumerInterface;
 import com.hydron.sample.springbootprototype.services.producer.ProducerInterface;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,28 +10,27 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.time.Instant;
+import java.util.Map;
 import java.util.Random;
+import java.util.function.Consumer;
 
 @SpringBootApplication
 public class SpringBootPrototypeApplication implements CommandLineRunner {
     private final ProducerInterface fooProducer;
     private final ProducerInterface barProducer;
-    private final ConsumerInterface fooConsumer;
-    private final ConsumerInterface barConsumer;
+    private final Map<Class<? extends ExampleData>, Consumer<ExampleData>> consumerMap;
     private final String serviceName;
     private static ApplicationContext context;
 
     public SpringBootPrototypeApplication(
             @Qualifier("FooProducer") ProducerInterface fooProducer,
             @Qualifier("BarProducer") ProducerInterface barProducer,
-            @Qualifier("FooConsumer") ConsumerInterface fooConsumer,
-            @Qualifier("BarConsumer") ConsumerInterface barConsumer,
+            Map<Class<? extends ExampleData>, Consumer<ExampleData>> consumerMap,
             @Value("${spring.application.name}") String serviceName
     ) {
         this.fooProducer = fooProducer;
         this.barProducer = barProducer;
-        this.fooConsumer = fooConsumer;
-        this.barConsumer = barConsumer;
+        this.consumerMap = consumerMap;
         this.serviceName = serviceName;
     }
 
@@ -54,8 +52,10 @@ public class SpringBootPrototypeApplication implements CommandLineRunner {
 
                 // We're "consuming" data.
                 Thread.sleep(random.nextLong(500L, 3000L));
-                fooConsumer.consumeData(foo);
-                barConsumer.consumeData(bar);
+                this.consumerMap.get(foo.getClass())
+                        .accept(foo);
+                this.consumerMap.get(bar.getClass())
+                        .accept(bar);
             }
         } catch (InterruptedException e) {
             Thread.currentThread()
