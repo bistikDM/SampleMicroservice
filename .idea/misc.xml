@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/Prototype/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBootPrototype/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/Prototype/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/SpringBootPrototype/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
