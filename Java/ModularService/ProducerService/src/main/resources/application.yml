@@ -1,1 +1,9 @@
-
+spring:
+  application:
+    name: "Producer-X"
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    topics:
+      example: "example_topic"
+    consumer:
+      group-id: "Producer-X"
