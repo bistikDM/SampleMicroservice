@@ -18,7 +18,7 @@ public class WordList {
         System.out.printf("[%s] [%s] -- Generating word list...%n", this.serviceName, Instant.now());
         InputStream is = this.getClass()
                 .getClassLoader()
-                .getResourceAsStream("WordList");
+                .getResourceAsStream("wordlist");
         if (Objects.isNull(is)) {
             throw new IOException("Resource not found!");
         }

@@ -16,7 +16,9 @@ public class WordList {
     public WordList(String serviceName) throws IOException {
         this.serviceName = serviceName;
         System.out.printf("[%s] [%s] -- Generating word list...%n", this.serviceName, Instant.now());
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream("WordList");
+        InputStream is = this.getClass()
+                .getClassLoader()
+                .getResourceAsStream("wordlist");
         if (Objects.isNull(is)) {
             throw new IOException("Resource not found!");
         }
