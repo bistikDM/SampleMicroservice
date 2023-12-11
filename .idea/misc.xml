@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/Java/SpringBootPrototype/pom.xml" />
         <option value="$PROJECT_DIR$/Java/ModularService/ProducerService/pom.xml" />
         <option value="$PROJECT_DIR$/Java/ModularService/ModularLibrary/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/ModularService/ConsumerService/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

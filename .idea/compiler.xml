@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ModularLibrary" />
+        <module name="ConsumerService" />
         <module name="Prototype" />
         <module name="ProducerService" />
         <module name="SpringBootPrototype" />
@@ -16,6 +17,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ConsumerService" options="-parameters" />
       <module name="ModularLibrary" options="-parameters" />
       <module name="ProducerService" options="-parameters" />
       <module name="SpringBootPrototype" options="-parameters" />
