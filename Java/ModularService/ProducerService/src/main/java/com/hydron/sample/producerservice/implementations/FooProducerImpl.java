@@ -19,7 +19,7 @@ public class FooProducerImpl implements ProducerInterface {
     @Override
     public ExampleData produceData() {
         return Foo.builder()
-                .name(this.wordList.getWord())
+                .names(new String[]{this.wordList.getWord(), this.wordList.getWord()})
                 .identifier(this.serviceName)
                 .timestamp(Instant.now())
                 .build();

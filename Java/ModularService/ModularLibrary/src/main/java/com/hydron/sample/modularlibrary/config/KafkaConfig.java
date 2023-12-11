@@ -2,6 +2,7 @@ package com.hydron.sample.modularlibrary.config;
 
 import com.hydron.sample.modularlibrary.msgservice.KafkaProducer;
 import com.hydron.sample.modularlibrary.msgservice.MsgServiceInterface;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -38,6 +39,7 @@ public class KafkaConfig {
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServer);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        configProps.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, true);
 
         return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(configProps));
     }
@@ -62,5 +64,10 @@ public class KafkaConfig {
         containerFactory.setConsumerFactory(consumerFactory);
 
         return containerFactory;
+    }
+
+    @Bean
+    public NewTopic exampleTopic(@Value("${spring.kafka.topics.example}") String topic) {
+        return new NewTopic(topic, 5, (short) 2);
     }
 }

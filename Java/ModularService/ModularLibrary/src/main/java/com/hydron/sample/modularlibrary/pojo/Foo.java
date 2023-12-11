@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.Arrays;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import java.time.Instant;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Foo implements ExampleData {
     @JsonProperty
-    private String name;
+    private String[] names;
 
     @JsonProperty
     private String identifier;
@@ -23,10 +24,10 @@ public class Foo implements ExampleData {
     private Instant timestamp;
 
     @JsonProperty
-    private static final String text = "%s [%s] - Foo says \"Hello, %s!\"";
+    private static final String text = "%s [%s] - Foo says \"Hello %s!\"";
 
     @Override
     public String getMessage() {
-        return String.format(text, this.identifier, this.timestamp, this.name);
+        return String.format(text, this.identifier, this.timestamp, Arrays.toString(this.names));
     }
 }

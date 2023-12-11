@@ -36,7 +36,7 @@ public class ConsumerServiceApplication implements CommandLineRunner {
         System.out.printf("%s application is starting...%n", this.serviceName);
     }
 
-    @KafkaListener(topics = "${spring.kafka.topics.example}")
+    @KafkaListener(topics = "${spring.kafka.topics.example}", containerFactory = "getKafkaListenerContainerFactory")
     public void listen(ExampleData msg) {
         Consumer<ExampleData> consumer = this.consumerMap.get(msg.getClass());
         if (Objects.isNull(consumer)) {
