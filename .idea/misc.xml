@@ -8,11 +8,14 @@
         <option value="$PROJECT_DIR$/SpringBootPrototype/pom.xml" />
         <option value="$PROJECT_DIR$/Java/Prototype/pom.xml" />
         <option value="$PROJECT_DIR$/Java/SpringBootPrototype/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/ModularService/ProducerService/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/ModularService/ModularLibrary/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/ModularService/ConsumerService/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

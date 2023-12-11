@@ -1,4 +1,4 @@
-package com.hydron.sample.utils;
+package com.hydron.sample.producerservice.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,8 @@ public class WordList {
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        wordArray = br.lines().toArray(String[]::new);
+        wordArray = br.lines()
+                .toArray(String[]::new);
         randomGenerator = new Random();
         System.out.printf("[%s] [%s] -- Word list generated!%n", this.serviceName, Instant.now());
     }

@@ -1,7 +1,8 @@
-package com.hydron.sample.springbootprototype;
+package com.hydron.sample.producerservice;
 
-import com.hydron.sample.springbootprototype.pojo.ExampleData;
-import com.hydron.sample.springbootprototype.services.producer.ProducerInterface;
+import com.hydron.sample.modularlibrary.msgservice.MsgServiceInterface;
+import com.hydron.sample.modularlibrary.pojo.ExampleData;
+import com.hydron.sample.producerservice.services.ProducerInterface;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -10,38 +11,37 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.time.Instant;
-import java.util.Map;
 import java.util.Random;
-import java.util.function.Consumer;
 
 @SpringBootApplication
-public class SpringBootPrototypeApplication implements CommandLineRunner {
+public class ProducerServiceApplication implements CommandLineRunner {
     private final ProducerInterface fooProducer;
     private final ProducerInterface barProducer;
-    private final Map<Class<? extends ExampleData>, Consumer<ExampleData>> consumerMap;
+    private final MsgServiceInterface msgServiceInterface;
     private final String serviceName;
+    private final String topic;
     private static ApplicationContext context;
 
-    public SpringBootPrototypeApplication(
+    public ProducerServiceApplication(
             @Qualifier("FooProducer") ProducerInterface fooProducer,
             @Qualifier("BarProducer") ProducerInterface barProducer,
-            Map<Class<? extends ExampleData>, Consumer<ExampleData>> consumerMap,
-            @Value("${spring.application.name}") String serviceName
-    ) {
+            MsgServiceInterface msgServiceInterface,
+            @Value("${spring.application.name}") String serviceName,
+            @Value("${spring.kafka.topics.example}") String topic) {
         this.fooProducer = fooProducer;
         this.barProducer = barProducer;
-        this.consumerMap = consumerMap;
+        this.msgServiceInterface = msgServiceInterface;
         this.serviceName = serviceName;
+        this.topic = topic;
     }
 
     public static void main(String[] args) {
-        context = SpringApplication.run(SpringBootPrototypeApplication.class, args);
+        context = SpringApplication.run(ProducerServiceApplication.class, args);
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws Exception {
         Random random = new Random();
-
         try {
             while (true) {
                 // We're "producing" data.
@@ -50,12 +50,9 @@ public class SpringBootPrototypeApplication implements CommandLineRunner {
                 ExampleData bar = barProducer.produceData();
                 System.out.printf("[%s] [%s] -- Data produced!%n", this.serviceName, Instant.now());
 
-                // We're "consuming" data.
-                Thread.sleep(random.nextLong(500L, 3000L));
-                this.consumerMap.get(foo.getClass())
-                        .accept(foo);
-                this.consumerMap.get(bar.getClass())
-                        .accept(bar);
+                // Sending the data.
+                this.msgServiceInterface.sendMessage(this.topic, foo);
+                this.msgServiceInterface.sendMessage(this.topic, bar);
             }
         } catch (InterruptedException e) {
             Thread.currentThread()

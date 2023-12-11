@@ -1,0 +1,7 @@
+FROM alpine
+LABEL authors="Bistik"
+
+COPY target/ProducerService-0.0.1-SNAPSHOT.jar .
+RUN apk add openjdk17
+
+ENTRYPOINT ["java", "-jar", "ProducerService-0.0.1-SNAPSHOT.jar"]

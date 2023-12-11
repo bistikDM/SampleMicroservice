@@ -1,0 +1,15 @@
+FROM alpine as BUILDER
+LABEL authors="Bistik"
+
+COPY target/ target/
+RUN apk add openjdk17
+
+RUN jdeps --print-module-deps --multi-release 17 --ignore-missing-deps --class-path="target/dependency/*" --module-path="target/dependency/*" target/ConsumerService-0.0.1-SNAPSHOT.jar > jre-deps.info
+RUN jlink --strip-java-debug-attributes --no-header-files --no-man-pages --output jre --add-modules $(cat jre-deps.info)
+
+FROM alpine
+
+COPY --from=BUILDER target/ConsumerService-0.0.1-SNAPSHOT.jar /
+COPY --from=BUILDER jre/ jre/
+
+ENTRYPOINT ["jre/bin/java", "-jar", "ConsumerService-0.0.1-SNAPSHOT.jar"]

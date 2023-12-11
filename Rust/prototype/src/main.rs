@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let data_consumer = DataConsumer::new(service_name);
 
     loop {
-        let mut duration = random_generator.gen_range(0..3000);
+        let mut duration = random_generator.gen_range(500..3000);
         thread::sleep(Duration::from_millis(duration));
 
         // We're "producing" data.
@@ -40,7 +40,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("[{}] [{}] -- Data produced!", service_name, Utc::now());
 
         // We're "consuming" data.
-        duration = random_generator.gen_range(0..3000);
+        duration = random_generator.gen_range(500..3000);
         thread::sleep(Duration::from_millis(duration));
         data_consumer.consume_foo_data(foo);
         data_consumer.consume_bar_data(bar);
