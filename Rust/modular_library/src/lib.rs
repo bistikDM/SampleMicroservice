@@ -1,4 +1,5 @@
 pub mod example_data;
 pub mod foo;
 pub mod bar;
-mod producer;
+pub mod producer;
+pub mod consumer;

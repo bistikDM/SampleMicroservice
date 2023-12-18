@@ -1,5 +1,8 @@
+use serde::{Deserialize, Serialize};
+
 use crate::example_data::ExampleData;
 
+#[derive(Serialize, Deserialize)]
 pub struct Foo {
     name: String,
     identifier: String,
