@@ -5,8 +5,14 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Rust/Prototype/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Rust/prototype/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/modular_library/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/modular_producer/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/producer/sample_producer/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Rust/Prototype/target" />
       <excludeFolder url="file://$MODULE_DIR$/Rust/prototype/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/modular_library/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/modular_producer/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/producer/sample_producer/target" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
