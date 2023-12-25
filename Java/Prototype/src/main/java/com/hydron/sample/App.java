@@ -19,7 +19,8 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 /**
- * Hello world!
+ * A sample application to perform some work, in this case it just produces some data and then consumes it. There is an
+ * artificial processing time in the form of a thread sleep to simulate load.
  */
 public class App {
 
