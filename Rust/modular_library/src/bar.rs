@@ -1,5 +1,8 @@
+use serde::{Deserialize, Serialize};
+
 use crate::example_data::ExampleData;
 
+#[derive(Serialize, Deserialize)]
 pub struct Bar {
     pub name: String,
     pub identifier: String,

@@ -1,5 +1,5 @@
 pub mod example_data;
 pub mod foo;
 pub mod bar;
-pub mod producer;
-pub mod consumer;
+pub mod kafka_producer;
+pub mod kafka_consumer;

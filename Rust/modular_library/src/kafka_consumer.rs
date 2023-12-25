@@ -1,8 +1,8 @@
 use std::collections::LinkedList;
 
+use kafka::{Error as KafkaError, Error};
 use kafka::client::FetchOffset;
 use kafka::consumer::{Consumer, MessageSets};
-use kafka::Error as KafkaError;
 use serde_json::Value;
 
 pub struct KafkaConsumer {
@@ -13,7 +13,7 @@ pub struct KafkaConsumer {
 }
 
 impl KafkaConsumer {
-    pub fn new(brokers: Vec<String>, group_id: &str, topic: &str) -> Self {
+    pub fn new(brokers: Vec<String>, group_id: &str, topic: &str) -> Result<Self, Error> {
         let group: String = String::from(group_id);
         let consumer: Result<Consumer, KafkaError> = Consumer::from_hosts(brokers.clone())
             .with_group(group)
@@ -21,11 +21,16 @@ impl KafkaConsumer {
             .with_topic(String::from(topic))
             .create();
 
-        return Self {
-            brokers,
-            consumer: consumer.unwrap_or_default(),
-            group_id: String::from(group_id),
-            topic: String::from(topic),
+        return match consumer {
+            Ok(consumer) => {
+                Ok(Self {
+                    brokers,
+                    consumer,
+                    group_id: String::from(group_id),
+                    topic: String::from(topic),
+                })
+            }
+            Err(error) => { Err(error) }
         };
     }
 
